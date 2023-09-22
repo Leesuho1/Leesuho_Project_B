@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
             else if(slot.state == Slot.SLOTSTATE.EMPTY && carryingItem != null)
             {
                 slot.Createitem(carryingItem.itemid);
-                Destroy(carryingItem);
+                Destroy(carryingItem.gameObject);
             }
             else if(slot.state == Slot.SLOTSTATE.FULL && carryingItem != null)
             {
