@@ -72,7 +72,14 @@ public class GameController : MonoBehaviour
             }
             else if(slot.state == Slot.SLOTSTATE.FULL && carryingItem != null)
             {
-
+                if(slot.itemObject.id == carryingItem.itemid)
+                {
+                    OnitemMergedwithTarget(slot.id);
+                }
+                else
+                {
+                    OnitemCarryFail();
+                }
             }
             else
             {
@@ -80,6 +87,14 @@ public class GameController : MonoBehaviour
                 OnitemCarryFail();
             }
         }
+    }
+    
+void OnitemMergedwithTarget(int targetSlotid);
+    {
+        var slot = GetSlotByld(targetSlotid);
+        Destroy(slot.itemObject.gameObject);
+        slot.Createitem(carryingItem.itemid+1);
+        Destroy(carryingItem.gameObject);
     }
 
     void OnitemSelected()
@@ -91,6 +106,8 @@ public class GameController : MonoBehaviour
         carryingItem.transform.Position = Vector3.MoveTowards(carryingItem.transform.Position, _target, delta);
 
     }
+
+    
 
     void OnitemCarryFail()
     {
